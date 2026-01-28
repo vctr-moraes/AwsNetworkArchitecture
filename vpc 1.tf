@@ -28,6 +28,11 @@ resource "aws_route_table" "route_table_public_anycompany_1" {
     gateway_id = aws_internet_gateway.internet_gateway_main_a.id
   }
 
+  route {
+    cidr_block                = "172.51.0.0/16"
+    vpc_peering_connection_id = aws_vpc_peering_connection.vpc_peering.id
+  }
+
   tags = {
     Name = "RTB-Public-AnyCompany-1"
   }
@@ -43,10 +48,10 @@ resource "aws_route_table" "route_table_private_anycompany_1" {
 
 # Association VPC x Route Table
 
-# resource "aws_main_route_table_association" "association_route_table_public" {
-#   vpc_id         = aws_vpc.main_a.id
-#   route_table_id = aws_route_table.route_table_public_anycompany_1.id
-# }
+resource "aws_main_route_table_association" "association_route_table_public" {
+  vpc_id         = aws_vpc.main_a.id
+  route_table_id = aws_route_table.route_table_public_anycompany_1.id
+}
 
 # Subnets
 
