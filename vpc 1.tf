@@ -41,6 +41,11 @@ resource "aws_route_table" "route_table_public_anycompany_1" {
 resource "aws_route_table" "route_table_private_anycompany_1" {
   vpc_id = aws_vpc.main_a.id
 
+  # route {
+  #   cidr_block     = "0.0.0.0/0"
+  #   nat_gateway_id = aws_nat_gateway.nat_gateway.id
+  # }
+
   tags = {
     Name = "RTB-Private-AnyCompany-1"
   }
